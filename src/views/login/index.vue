@@ -3,12 +3,36 @@
     <!-- 卡片 element-ui 组件 -->
     <el-card class="my-card">
       <img src="../../assets/images/logo_index.png" alt="">
+      <el-form :model="loginForm">
+        <el-form-item>
+          <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-input v-model="loginForm.code" placeholder="请输入验证码" style="width:236px;margin-right:10px"></el-input>
+          <el-button>发送验证码</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox :value="true">我已阅读并同意用户协议和隐私条款</el-checkbox>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" style="width:100%">登 录</el-button>
+        </el-form-item>
+      </el-form>
     </el-card>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      loginForm: {
+        mobile: '',
+        code: ''
+      }
+    }
+  }
+}
 </script>
 
 <style scoped lang='less'>
@@ -29,7 +53,7 @@ export default {}
     img {
       display: block;
       width: 200px;
-      margin: 0 auto;
+      margin: 0 auto 20px;
     }
   }
 }
