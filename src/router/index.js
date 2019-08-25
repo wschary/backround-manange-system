@@ -6,6 +6,9 @@ import Login from '@/views/login'
 import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 import NotFound from '@/views/404'
+import Test from '@/views/test'
+
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -23,9 +26,22 @@ const router = new VueRouter({
         { path: '/', name: 'welcome', component: Welcome }
       ]
     },
+    { path: '/test', name: 'test', component: Test },
     // 404 处理  通配
     { path: '*', name: '404', component: NotFound }
   ]
+})
+
+// 前置守卫
+router.beforeEach((to, from, next) => {
+  const user = store.getUser()
+  // 访问的是登录页面：放行
+  // 访问的是其他页面且没有做过登录：拦截  登录页面。
+  // if (to.path === '/login') return next()
+  // if (!user.token) return next('/login')
+  // next()
+  if (to.path !== '/login' && !user.token) return next('/login')
+  next()
 })
 
 export default router

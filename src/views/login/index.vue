@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     // 定义校验函数  先申明
@@ -81,7 +82,9 @@ export default {
               this.loginForm
             )
             .then(res => {
-              // 成功
+              // 成功 res 对象响应对象 res.data 主体
+              // 保存  用户信息（token） 获取响应主体下data对象
+              store.setUser(res.data.data)
               this.$router.push('/')
             })
             .catch(() => {

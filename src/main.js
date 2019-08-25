@@ -10,8 +10,7 @@ import '@/styles/index.less'
 // 目录的默认索引文件  index文件  .js .vue .json 优先级按照现在的顺序
 import router from '@/router'
 
-// 简单配置axios
-import axios from 'axios'
+import axios from '@/api'
 Vue.prototype.$http = axios
 
 Vue.use(ELEMENTUI)
