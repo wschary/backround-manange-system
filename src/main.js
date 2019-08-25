@@ -11,7 +11,7 @@ import '@/styles/index.less'
 import router from '@/router'
 
 // 简单配置axios
-import axios from 'axios'
+import axios from '@/api'
 Vue.prototype.$http = axios
 
 Vue.use(ELEMENTUI)

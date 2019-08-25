@@ -27,7 +27,9 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
+
   data () {
     // 定义校验函数  先申明
     // 1. 三个参数
@@ -82,6 +84,8 @@ export default {
             )
             .then(res => {
               // 成功
+              store.setUser(res.data.data)
+              // console.log(res)  这里存的是用户信息
               this.$router.push('/')
             })
             .catch(() => {
