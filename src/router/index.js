@@ -7,6 +7,7 @@ import Home from '@/views/home'
 import Welcome from '@/views/welcome'
 import NotFound from '@/views/404'
 import Test from '@/views/test'
+import Article from '@/views/article'
 
 import store from '@/store'
 
@@ -23,7 +24,8 @@ const router = new VueRouter({
       component: Home,
       children: [
         // 欢迎页面  如果子路由有名字  父级路由需要删除
-        { path: '/', name: 'welcome', component: Welcome }
+        { path: '/', name: 'welcome', component: Welcome },
+        { path: '/article', name: 'article', component: Article }
       ]
     },
     { path: '/test', name: 'test', component: Test },

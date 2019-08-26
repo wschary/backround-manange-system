@@ -4,8 +4,11 @@
       <!-- logo -->
       <div class="logo" :class="{miniLogo:isCollapse}"></div>
       <!-- 导航菜单 -->
+      <!-- default-active="/" 根据当路径来设置 this.$route.path -->
+      <!-- this.$route 获取路由数据  this.$router 调用路由函数 -->
+      <!-- 获取地址栏传参：user?id=100  this.$route.query.id  /user/100 this.$route.params.id  -->
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         class="el-menu-vertical-demo"
         background-color="#002033"
         text-color="#fff"
