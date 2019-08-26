@@ -51,14 +51,14 @@
         <el-dropdown class="my-dropdown">
           <span class="el-dropdown-link">
             <!-- 头像 用户名称 -->
-            <img class="avatar" src="../../assets/images/avatar.jpg" alt />
-            <span class="username">用户名字</span>
+            <img class="avatar" :src="photo" alt />
+            <span class="username"> {{name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <!--  slot="dropdown" 插槽 -->
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting()">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -71,13 +71,38 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      name: '',
+      photo: ''
     }
   },
+  created () {
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
+  },
   methods: {
+    // el-dropdown-item 绑定事件  不支持click
+    // 当你给组件绑定事件的时候，如果组件没有支持这个事件，当然不会触发。
+    // click是原生dom拥有的事件，目的给组件渲染后的dom绑定事件
+    // 事件修饰符，例如 @click.prevent="函数"  阻止默认行为  @click.native 把原生事件绑定在组件上
+    // https://cn.vuejs.org/v2/guide/events.html#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6
+
+    // 去设置页面
+    setting () {
+      this.$router.push('/setting')
+    },
+    // 退出登录
+    logout () {
+      // 清除存储用户信息
+      store.delUser()
+      // 跳转到登录
+      this.$router.push('/login')
+    },
     toggleMenu () {
       // 切换侧边栏展开与收起
       // 数据 isCollapse 默认值false 展开意思
